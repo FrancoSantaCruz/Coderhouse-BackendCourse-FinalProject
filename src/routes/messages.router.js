@@ -12,5 +12,15 @@ router.post('/create', async (req, res) => {
     }
 })
 
+router.get('/:cid', async (req,res) => {
+    const { cid } = req.params
+    try {
+        const chat = await messagesManager.findByID(cid)
+        res.json({ chat })
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+})
+
 
 export default router;

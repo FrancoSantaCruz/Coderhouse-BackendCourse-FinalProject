@@ -69,7 +69,6 @@ socketServer.on("connection", (socket) => {
 
     // -----------------------CHAT SOCKET--------------------------------
     socket.on("message", async (info) => {
-        
         // Creo un objeto con la misma estructura que el schema de message.
         let obj = {
             chats: [
@@ -92,7 +91,8 @@ socketServer.on("connection", (socket) => {
             chatFound.chats = [ ...chatFound.chats, ...obj.chats]
             messagesManager.updateOne(info.id, chatFound)
         }
-        socketServer.emit("chat", chatFound.chats);
+        const chat = await messagesManager.findByID(info.id)
+        socketServer.emit("chat", chat);
     })
     // -------------------------------------------------------------
 

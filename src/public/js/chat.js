@@ -52,6 +52,6 @@ chatForm.onsubmit = (e) => {
 }
 
 socketClient.on('chat', (messages) => {
-    const chatMessage = messages.map( (message) => `<p>${message.autor}: ${message.content}</p>` ).join(" ");
-    chat.innerHTML = chatMessage;
+    const chatMsg = messages.chats.map( (msg) => `<p>${msg.autor.name}: ${msg.content}</p>` ).join(" ");
+    chat.innerHTML = chatMsg;
 })
