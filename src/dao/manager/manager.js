@@ -1,3 +1,4 @@
+
 export default class Manager {
     constructor(model){
         this.model = model
@@ -18,3 +19,4 @@ export default class Manager {
         return this.model.deleteOne({_id: id})
     }
 }
+

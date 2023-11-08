@@ -17,6 +17,20 @@ router.get('/', async (req,res) => {
     }
 })
 
+router.get('/:cid', async (req,res) => {
+    const { cid } = req.params
+    try {
+        const cart = await cartsManager.findByID(cid)
+        if (cart){
+            res.status(200).json({message:"Cart found", cart})
+        } else {
+            res.status(200).json({message:"Cart not exists"})
+        }
+    } catch (error) {
+        res.status(500).json({message: error})
+    }
+})
+
 
 // CREATE CART
 router.post('/', async (req, res) => {
@@ -49,10 +63,10 @@ router.put("/:cid/product/:pid", async (req, res) => {
 router.delete("/:cid/product/:pid", async (req, res) => {
     try {
         const {cid, pid} = req.params
-    
+
         const reply = await cartsManager.deleteProdFromCart(cid, pid)
-    
-        res.status(200).json({ProductAdded: reply})
+        
+        res.status(200).json({ProductDeleted: reply})
       } catch (error) {
         res.status(500).json({message: error})
       }

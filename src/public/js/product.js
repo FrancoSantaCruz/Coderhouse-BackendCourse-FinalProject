@@ -44,6 +44,5 @@ socketClient.on("allProducts", (productList) => {
                 <button>ADD TO CART</button>
             </div>
             `).join(" ")
-    console.log(productList)
     products.innerHTML = prods
 })
