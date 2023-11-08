@@ -2,11 +2,6 @@ import { Router } from "express";
 import { cartsManager } from '../dao/manager/carts.manager.js'
 
 const router = Router();
-// CRUD 
-// CREATE CART X
-// READ ALL CARTS  X
-// READ ONE CART X
-// UPDATE CART (ADD AND DELETE ONE ITEM TO CART) X X
 
 // READ ALL CARTS
 router.get('/', async (req,res) => {
