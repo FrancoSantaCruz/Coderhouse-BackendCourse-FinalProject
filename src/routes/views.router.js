@@ -10,40 +10,48 @@ router.get('/', (req, res) => {
     res.render('home')
 })
 
-router.get('/products', async(req, res) => {
+
+
+// No puedo implementar Paginate a websocket
+router.get('/productsWS', async (req, res) => {
     const products = await productsManager.findAll()
-    res.render('products', {products:products, style:"products"})
+    res.render('productsWS', { products: products, style: "products"})
 })
 
-router.get('/product/:pid', async(req, res) => {
-    const {pid} = req.params
+
+// View de products con paginate pero sin websocket
+router.get('/products', async (req, res) => {
+    const products = await productsManager.findAllPg(req.query)
+    
+    const obj = JSON.parse(JSON.stringify(products))
+    res.render('products', { products: obj.payload, style: "products", info: obj})
+}) 
+
+router.get('/product/:pid', async (req, res) => {
+    const { pid } = req.params
     const product = await productsManager.findByID(pid)
-    res.render('oneProduct', {product})
+    res.render('oneProduct', { product })
 })
-
 
 
 // CARTS VIEWS
-router.get('/cart/:cid', async(req,res) => {
-    const {cid} = req.params   
+router.get('/cart/:cid', async (req, res) => {
+    const { cid } = req.params
     const cart = await cartsManager.findByID(cid)
-
-    res.render('cart', {cart : cart.products})
+    res.render('cart', { cart: cart.cart })
 })
-
-
 
 
 // CHATS VIEWS
 router.get("/chats", async (req, res) => {
     const chats = await messagesManager.findAll()
-    res.render("chats", {chats});
+    res.render("chats", { chats });
 });
 
 router.get("/chat/:cid", async (req, res) => {
     const { cid } = req.params
     const chat = await messagesManager.findByID(cid)
-    res.render("chat", { chat: chat._id , messages: chat.chats });
+    res.render("chat", { chat: chat._id, messages: chat.chats });
 });
 
 

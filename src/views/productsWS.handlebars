@@ -49,24 +49,11 @@
 
 
     {{!-- SHOW PRODUCTS CREATED --}}
-    <section class="show_products __container">
+    <section class="show_products __container" >
         <h1>Catálogo de Productos</h1>
         <hr>
-        {{#each products}}
-        <div>
-            <h2>{{this.title}}</h2>
-            <p>Description: {{this.description}}</p>
-            <p>Price: {{this.price}}</p>
-            <p>Quantity: {{this.quantity}}</p>
-            <p>Category: {{this.category}}</p>
-            <p>Stock: {{this.stock}}</p>
-            <p>Status: {{#if this.status}}Available{{else}}Unavailable{{/if}}</p>
-            <hr>
-        </div>
-        {{/each}}
-        <div>
-            {{#if info.hasPrevPage}}<a href="http://localhost:8080/products?page={{info.prevPage}}">Previous Page | </a>{{/if}}
-            {{#if info.hasNextPage}}<a href="http://localhost:8080/products?page={{info.nextPage}}">Next Page</a>{{/if}}
+        <div id="show_products_list" class="show_products __list">
+            
         </div>
     </section>
 </div>
@@ -80,23 +67,23 @@
 
 
 
-{{!-- <section class="show_products __container">
-    <h1>Catálogo de Productos</h1>
-    {{#if products}}
-    {{#each products}}
-    <hr>
-    <div>
-        <h2>{{title}}</h2>
-        <h3>{{description}}</h3>
-        <p>${{price}} | Cantidad disponible: {{stock}}</p>
-        {{#if status}}
-        <p>Disponible</p>
+{{!-- <section class="show_products __container" >
+        <h1>Catálogo de Productos</h1>
+        {{#if products}}
+        {{#each products}}
+        <hr>
+        <div>
+            <h2>{{title}}</h2>
+            <h3>{{description}}</h3>
+            <p>${{price}} | Cantidad disponible: {{stock}}</p>
+            {{#if status}}
+            <p>Disponible</p>
+            {{else}}
+            <p>No disponible</p>
+            {{/if}}
+        </div>
+        {{/each}}
         {{else}}
-        <p>No disponible</p>
+        <h1>NO HAY PRODUCTOS DISPONIBLES</h1>
         {{/if}}
-    </div>
-    {{/each}}
-    {{else}}
-    <h1>NO HAY PRODUCTOS DISPONIBLES</h1>
-    {{/if}}
-</section> --}}
+    </section> --}}

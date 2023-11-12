@@ -8,7 +8,7 @@ class CartsManager extends Manager {
     }
 
     async findByID(id) {
-        return cartsModel.findById({ _id: id }).populate('cart.product')
+        return cartsModel.findById({ _id: id }).populate('cart.product').lean()
     }
 
     async addProdToCart(cid, pid) {

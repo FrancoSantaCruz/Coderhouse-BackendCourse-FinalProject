@@ -6,7 +6,7 @@ const router = Router()
 
 router.get('/', async(req, res) => {
     try {
-        const products = await productsManager.findAll(req.query)
+        const products = await productsManager.findAllPg(req.query)
         if(!products){
             res.status(200).json({message: 'No products found.'})
         } else {

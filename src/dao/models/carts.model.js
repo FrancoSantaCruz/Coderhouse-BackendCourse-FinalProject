@@ -4,11 +4,11 @@ const productSchema = new Schema({
     product: {
         type: Schema.Types.ObjectId,
         ref: "Products",
-        require: true
+        required: true
     },
     quantity: {
         type: Number,
-        require: true
+        required: true
     }
 })
 

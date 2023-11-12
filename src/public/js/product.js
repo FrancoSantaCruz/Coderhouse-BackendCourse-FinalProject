@@ -46,3 +46,4 @@ socketClient.on("allProducts", (productList) => {
             `).join(" ")
     products.innerHTML = prods
 })
+
