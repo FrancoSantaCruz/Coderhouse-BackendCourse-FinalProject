@@ -13,6 +13,10 @@ const userSchema = new Schema({
     password: {
         type: String
     },
+    cart: {
+        type: Schema.Types.ObjectId,
+        ref: "Carts"
+    },
     date: {
         type: Date,
         default: Date.now

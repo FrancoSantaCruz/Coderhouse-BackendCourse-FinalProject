@@ -7,20 +7,20 @@ class ProductsManager extends Manager {
     }
 
     async findAllPg(options) {
-        const { limit, page, category, status, sort } = options
+        const { limit = 10, page = 1, category, status, sort } = options
         let filters = {}
 
         const opt = {
-            page : page ? page : 1,
-            limit : limit ? limit : 10,
+            page,
+            limit,
             sort : sort == "-1" ? {price : -1} : {price : 1}
         }
 
-        if(status){
-            filters.status = status
-        }
         if(category){
             filters.category = category
+        }
+        if(status){
+            filters.status = status
         }
 
         const products = await productsModel.paginate( filters, opt )

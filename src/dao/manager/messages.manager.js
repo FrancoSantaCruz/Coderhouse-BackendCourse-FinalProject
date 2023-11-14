@@ -5,7 +5,7 @@ class MessagesManager {
         return messagesModel.find().lean()
     }
     async findByID(id){
-        return messagesModel.findById({_id: id}).populate('chats.autor')
+        return messagesModel.findById({_id: id}).populate('chats.autor').lean()
     }
     async createOne(obj){
         return messagesModel.create(obj)
@@ -15,6 +15,10 @@ class MessagesManager {
     }
     async deleteOne(id){
         return messagesModel.deleteOne({_id: id})
+    }
+    async findByField(obj){
+        const res = await messagesModel.findOne(obj)
+        return res
     }
 }
 

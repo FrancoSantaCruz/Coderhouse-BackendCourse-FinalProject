@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
 // No puedo implementar Paginate a websocket
 router.get('/productsWS', async (req, res) => {
     const products = await productsManager.findAll()
+    // console.log(products);
     res.render('productsWS', { products: products, style: "products"})
 })
 

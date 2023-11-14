@@ -12,6 +12,7 @@ import messagesRouter from './routes/messages.router.js';
 import { messagesManager } from './dao/manager/messages.manager.js';
 import { userManager } from './dao/manager/users.manager.js'
 import { productsManager } from './dao/manager/products.manager.js';
+import { cartsManager } from './dao/manager/carts.manager.js';
 
 const app = express();
 
@@ -48,12 +49,13 @@ socketServer.on("connection", (socket) => {
     socket.on("newUser", async (user) => {
 
         userFound = await userValidator(user[1])
-        userFound = userFound[0]
         if (!userFound) {
+            const cart = await cartsManager.createOne({})
             let obj = {
                 name: user[0],
                 email: user[1],
-                password: user[2]
+                password: user[2],
+                cart: cart._id
             }
             userFound = await userManager.createOne(obj)
             socket.broadcast.emit("newUserBroadcast", user[0])
@@ -64,7 +66,6 @@ socketServer.on("connection", (socket) => {
         }
     })
     // -------------------------------------------------------------
- 
 
 
     // -----------------------CHAT SOCKET--------------------------------
@@ -94,11 +95,10 @@ socketServer.on("connection", (socket) => {
         const chat = await messagesManager.findByID(info.id)
         socketServer.emit("chat", chat);
     })
-    // -------------------------------------------------------------
+    // ----------------------------------------------------------------------
 
 
     // -----------------------PRODUCTS SOCKET--------------------------------
-
     socket.on("product", async (product) => {
         await productsManager.createOne(product)
 
@@ -110,13 +110,13 @@ socketServer.on("connection", (socket) => {
 })
 
 async function userValidator(email) {
-    const users = await userManager.findAll()
-    let user = users.filter(user => user.email == email)
+    const obj = {email:email}
+    const user = await userManager.findByField(obj)
     return user
 }
 
 async function chatValidator(id) {
-    const chats = await messagesManager.findAll()
-    let chat = chats.filter(chat => chat._id == id)
-    return chat[0]
+    const obj = {_id:id}
+    const chat = await messagesManager.findByField(obj)
+    return chat
 }

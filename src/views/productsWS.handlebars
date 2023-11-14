@@ -49,11 +49,27 @@
 
 
     {{!-- SHOW PRODUCTS CREATED --}}
-    <section class="show_products __container" >
+    <section class="show_products __container">
         <h1>Catálogo de Productos</h1>
         <hr>
         <div id="show_products_list" class="show_products __list">
-            
+
+            {{#each products}}
+            <div>
+                <h2>{{this.title}}</h2>
+                <p>Description: {{this.description}}</p>
+                <p>Price: {{this.price}}</p>
+                <p>Quantity: {{this.quantity}}</p>
+                <p>Category: {{this.category}}</p>
+                <p>Stock: {{this.stock}}</p>
+                <p>Status: {{#if this.status}}Available{{else}}Unavailable{{/if}}</p>
+                <hr>
+            </div>
+            <div class="prod_btns">
+                <button type="submit">ADD TO CART</button>
+                <button type="submit">SHOW DETAILS</button>
+            </div>
+            {{/each}}
         </div>
     </section>
 </div>
@@ -67,23 +83,23 @@
 
 
 
-{{!-- <section class="show_products __container" >
-        <h1>Catálogo de Productos</h1>
-        {{#if products}}
-        {{#each products}}
-        <hr>
-        <div>
-            <h2>{{title}}</h2>
-            <h3>{{description}}</h3>
-            <p>${{price}} | Cantidad disponible: {{stock}}</p>
-            {{#if status}}
-            <p>Disponible</p>
-            {{else}}
-            <p>No disponible</p>
-            {{/if}}
-        </div>
-        {{/each}}
+{{!-- <section class="show_products __container">
+    <h1>Catálogo de Productos</h1>
+    {{#if products}}
+    {{#each products}}
+    <hr>
+    <div>
+        <h2>{{title}}</h2>
+        <h3>{{description}}</h3>
+        <p>${{price}} | Cantidad disponible: {{stock}}</p>
+        {{#if status}}
+        <p>Disponible</p>
         {{else}}
-        <h1>NO HAY PRODUCTOS DISPONIBLES</h1>
+        <p>No disponible</p>
         {{/if}}
-    </section> --}}
+    </div>
+    {{/each}}
+    {{else}}
+    <h1>NO HAY PRODUCTOS DISPONIBLES</h1>
+    {{/if}}
+</section> --}}

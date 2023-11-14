@@ -4,7 +4,8 @@ const username = document.getElementById("username");
 const chatForm = document.getElementById("chatForm");
 const chatMessage = document.getElementById("chatMessage");
 const chat = document.getElementById("chat");
-const chat_id = document.getElementById("chat_id")
+
+// const chat_id = document.getElementById("chat_id");
 
 Swal.fire({
     title: "Bienvenidx!",
@@ -46,8 +47,11 @@ socketClient.on('newUserBroadcast', (user) => {
 
 chatForm.onsubmit = (e) => {
     e.preventDefault();
-    let aux = chat_id.textContent.split(':')
-    const cid = aux[1].trim()
+    // let aux = chat_id.textContent.split(':')
+    // const cid = aux[1].trim()
+
+    // handlebars check
+    const cid = chatForm.dataset.chat
     socketClient.emit("message", {message: chatMessage.value, id: cid});
 }
 
